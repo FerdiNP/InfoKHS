@@ -16,7 +16,7 @@ class Jadwal extends Model
     */
     protected $fillable = [
     'NIM', //Primary key
-    'id_jadwal', //Foreign key dari tabel KRS
+    'id_matkul', //Foreign key dari tabel KRS
     'nama_dosen',
     'ruang',
     'jam',
