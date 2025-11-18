@@ -3,6 +3,6 @@
 ### Anggota Kelompok :
 - Syarif Hermawan
 - Ferdi Naufal Prasetyo
-- Gemilang Rizmart Samodra
+- Gemilang Rizmart Samodra /202210370311282
 - Ferdhant Arya Exshandy
 - Marcell Leeviroy
