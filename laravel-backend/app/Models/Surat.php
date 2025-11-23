@@ -13,7 +13,6 @@ class Surat extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'nomor_surat',
         'nama_pemohon',
         'jenis_surat',
         'keterangan',
