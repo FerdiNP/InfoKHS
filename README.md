@@ -1,4 +1,4 @@
-# Projek Rekayasa Interaksi 
+# Rekayasa Interaksi 
 ## Rekayasa Interaksi Kelas C
 ### Anggota Kelompok :
 - Syarif Hermawan / 202210370311114
