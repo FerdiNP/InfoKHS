@@ -1,7 +1,6 @@
-<!-- ================= TEMPLATE ================= -->
 <template>
-  <div class="page" v-if="visible">
-    <div class="bg-layer" />
+  <div class="page">
+    <!-- langsung overlay saja -->
     <div class="overlay"></div>
     <div class="modal-card" role="dialog" aria-modal="true">
       <div class="icon-wrap">
@@ -23,24 +22,18 @@
   </div>
 </template>
 
-<!-- ================= SCRIPT ================= -->
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-const router = useRouter();
-const visible = ref(true);
+const emit = defineEmits(["close"]);
+
 function lihat() {
-  visible.value = false;
-  router.push("/jadwal-kuliah");
+  emit("close");
 }
 
 function tutup() {
-  visible.value = false;
-  router.push("/");
+  emit("close");
 }
 </script>
 
-<!-- ================= STYLE ================= -->
 <style scoped>
 .page {
   position: fixed;
@@ -48,25 +41,14 @@ function tutup() {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  font-family: Inter, "Segoe UI", Roboto;
-}
-
-.bg-layer {
-  position: absolute;
-  inset: 0;
-  background-color: white;
-  background-size: cover;
-  background-position: center;
-  filter: blur(8px) brightness(0.6);
-  transform: scale(1.03);
-  z-index: 0;
+  z-index: 3000;
+  pointer-events: auto;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(6px);
   z-index: 1;
 }
@@ -74,14 +56,25 @@ function tutup() {
 .modal-card {
   position: relative;
   z-index: 2;
-  width: min(376px, 92%);
-  height: min(300px, 92%);
-  background: white;
-  border-radius: 12px;
-  padding: 28px;
-  box-shadow: 0 18px 30px rgba(13, 18, 25, 0.45);
+  width: min(380px, 92%);
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.45);
   text-align: center;
-  margin: 10%;
+}
+
+.modal-card {
+  transform: scale(0.95);
+  opacity: 0;
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .icon-wrapper {
@@ -99,7 +92,7 @@ function tutup() {
   height: 70%;
   border-radius: 50%;
   display: flex;
-  align-items: center;
+ 	align-items: center;
   justify-content: center;
   background: #fee4e2;
 }

@@ -1,31 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router"
 
-import HomeView from "../components/HelloWorld.vue"
-import JadwalView from "../components/jadwalKuliah.vue"
-import AlertDetails from "../components/alertDetails.vue"
-import notificationJadwal from "../components/notificationJadwal.vue"
+import Home from "../views/home.vue"
+import Jadwal from "../views/jadwalKuliah/index.vue"
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView
+    component: Home
   },
   {
     path: "/jadwal-kuliah",
     name: "jadwal",
-    component: JadwalView
+    component: Jadwal
     },
-  {
-    path: "/alert",
-    name: "alertDetails",
-    component: AlertDetails
-  },
-  {
-    path: "/notification",
-    name: "notification",
-    component: notificationJadwal
-  }
 ]
 
 const router = createRouter({

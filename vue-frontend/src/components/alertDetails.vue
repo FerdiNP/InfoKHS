@@ -1,15 +1,14 @@
-<!-- ================= TEMPLATE ================= -->
 <template>
-  <div class="page" v-if="visible">
-    <div class="bg-layer" />
+  <div class="page">
     <div class="overlay"></div>
+
     <div
-      v-if="alert_type === 'warning'"
+      v-if="alertType === 'warning'"
       class="modal-card"
       role="dialog"
       aria-modal="true"
     >
-      <div class="icon-wrap" @click="lihat">
+      <div class="icon-wrap">
         <div class="icon-wrapper-alert">
           <div class="icon-wrapper-2-alert">
             <div class="icon-alert"></div>
@@ -20,9 +19,10 @@
       <h2 class="title">Perubahan Kelas!</h2>
       <p class="subtitle">
         Kelas anda telah berpindah karena kuota penuh!
-        <br />
-        <br />Mata Kuliah : {{ Data[0].Mata_Kuliah }} <br />Kelas :
-        {{ Data[0].Kelas }} <br />Dosen : {{ Data[0].Dosen }}
+        <br /><br />
+        Mata Kuliah : {{ data?.matkul }} <br />
+        Kelas : {{ data?.kelas_baru || data?.kelas }} <br />
+        Dosen : {{ data?.dosen }}
       </p>
 
       <div class="actions">
@@ -31,12 +31,12 @@
     </div>
 
     <div
-      v-else-if="alert_type === 'error'"
+      v-else-if="alertType === 'error'"
       class="modal-card"
       role="dialog"
       aria-modal="true"
     >
-      <div @click="lihat" class="icon-wrap">
+      <div class="icon-wrap">
         <div class="icon-wrapper-danger">
           <div class="icon-wrapper-2-danger">
             <div class="icon-danger"></div>
@@ -46,10 +46,12 @@
       <h2 class="title">Perubahan Jadwal Kuliah</h2>
       <p class="subtitle">
         Kelas anda berpindah karena kelas sebelumnya penuh.
-        <br />
-        <br />Mata Kuliah : {{ Data[0].Mata_kuliah }} <br />Jadwal Lama :
-        {{ Data[0].Jadwal_Lama }} <br />Jadwal Baru : {{ Data[0].Jadwal_Baru }}
-        <br />Ruangan : {{ Data[0].Ruangan }} <br />Dosen : {{ Data[0].Dosen }}
+        <br /><br />
+        Mata Kuliah : {{ data?.matkul }} <br />
+        Jadwal Lama : {{ data?.jadwal_lama || "-" }} <br />
+        Jadwal Baru : {{ data?.jadwal_baru }} <br />
+        Ruangan : {{ data?.ruang_baru || data?.ruang_lama }} <br />
+        Dosen : {{ data?.dosen }}
       </p>
       <div class="actions">
         <button class="btn primary" @click="tutup">OK</button>
@@ -58,32 +60,25 @@
   </div>
 </template>
 
-<!-- ================= SCRIPT ================= -->
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-const router = useRouter();
-const Data = [
-  {
-    alert_type: "error",
-    Mata_Kuliah: "Rekayasa Ulang Sistem",
-    Kelas: null,
-    Dosen: "Rusdi, M.Kom",
-    Jadwal_Lama: "Senin, 08.00-10.00",
-    Jadwal_Baru: "Rabu, 09.00-10.00",
-    Ruangan: "GKB 3 R612 → GKB 4 R615",
+const props = defineProps({
+  alertType: {
+    type: String,
+    default: "warning",
   },
-];
-// Ambil alert_type dari elemen pertama
-const alert_type = ref(Data[0].alert_type);
-const visible = ref(true);
+  data: {
+    type: Object,
+    default: () => ({}),
+  },
+});
+
+const emit = defineEmits(["close"]);
 
 function tutup() {
-  router.push("/jadwal-kuliah");
+  emit("close");
 }
 </script>
 
-<!-- ================= STYLE ================= -->
 <style scoped>
 .page {
   position: fixed;
@@ -91,25 +86,14 @@ function tutup() {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  font-family: Inter, "Segoe UI", Roboto;
-}
-
-.bg-layer {
-  position: absolute;
-  inset: 0;
-  background-color: white;
-  background-size: cover;
-  background-position: center;
-  filter: blur(8px) brightness(0.6);
-  transform: scale(1.03);
-  z-index: 0;
+  z-index: 3000;
+  pointer-events: auto;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(6px);
   z-index: 1;
 }
@@ -117,23 +101,25 @@ function tutup() {
 .modal-card {
   position: relative;
   z-index: 2;
-  width: min(376px, 92%);
-  background: white;
-  border-radius: 12px;
-  padding: 28px;
-  box-shadow: 0 18px 30px rgba(13, 18, 25, 0.45);
+  width: min(380px, 92%);
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 18px 38px rgba(15, 23, 42, 0.45);
   text-align: center;
-  margin: 10%;
 }
 
-.icon-wrapper {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fef3f2;
+.modal-card {
+  transform: scale(0.95);
+  opacity: 0;
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .icon-wrapper-alert {
