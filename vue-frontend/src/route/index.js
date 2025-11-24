@@ -6,13 +6,18 @@ import EditProfile from "../views/editprofile/index.vue";
 import Jadwal from "../views/jadwalKuliah/index.vue"
 import KRS from "../views/krs/index.vue"
 import Keuangan from "../views/keuangan/index.vue";
-import Surat from "../views/surat/index.vue"
+import Surat from "../views/surat/index.vue";
 
 const routes = [
   {
+    path: "/",
+    redirect: "/login"
+  },
+  {
     path: "/login",
     name: "login",
-    component: Login
+    component: Login,
+    meta: { hideLayout: true }
   },
   {
     path: "/profile",

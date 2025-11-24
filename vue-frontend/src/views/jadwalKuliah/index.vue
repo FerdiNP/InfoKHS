@@ -1,145 +1,143 @@
 <template>
-  <div class="page">
-    <div class="page-inner">
-      <h1 class="title">Jadwal Kuliah</h1>
+  <div class="page-inner">
+    <h1 class="title">Jadwal Kuliah</h1>
 
-      <div class="info-container">
-        <div class="info">
-          <p class="info-label">NIM</p>
-          <p class="info-value">202210370311272</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Nama</p>
-          <p class="info-value">Gemilang Rizmart Samodra</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Tahun Akademik</p>
-          <p class="info-value">2025/2026</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Semester</p>
-          <p class="info-value">Ganjil</p>
-        </div>
+    <div class="info-container">
+      <div class="info">
+        <p class="info-label">NIM</p>
+        <p class="info-value">202210370311272</p>
       </div>
-
-      <div class="alert alert-warning">
-        <div class="alert-header">
-          <div class="icon-wrap">
-            <div class="icon-wrapper-alert">
-              <div class="icon-wrapper-2-alert">
-                <div class="icon-alert"></div>
-              </div>
-            </div>
-          </div>
-          <div class="content">
-            <span class="alert-title">Terdapat Perubahan Jadwal</span>
-            <p class="alert-desc">
-              Cek perubahan jadwal pada Mata Kuliah dengan menekan tombol Icon
-              Danger pada tabel.
-            </p>
-          </div>
-        </div>
+      <div class="info">
+        <p class="info-label">Nama</p>
+        <p class="info-value">Gemilang Rizmart Samodra</p>
       </div>
-
-      <div class="alert alert-danger">
-        <div class="alert-header">
-          <div class="icon-wrap">
-            <div class="icon-wrapper-danger">
-              <div class="icon-wrapper-2-danger">
-                <div class="icon-danger"></div>
-              </div>
-            </div>
-          </div>
-          <div class="content">
-            <span class="alert-title">Terdapat Perubahan Kelas</span>
-            <p class="alert-desc">
-              Cek perubahan Kelas pada Mata Kuliah dengan menekan tombol Icon
-              Error pada tabel.
-            </p>
-          </div>
-        </div>
+      <div class="info">
+        <p class="info-label">Tahun Akademik</p>
+        <p class="info-value">2025/2026</p>
       </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Mata Kuliah</th>
-              <th>SKS</th>
-              <th>Kelas</th>
-              <th>Nama Dosen</th>
-              <th>Ruang</th>
-              <th>Jam</th>
-              <th>Presensi</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr v-for="(row, index) in tableData" :key="index">
-              <td>
-                <div class="no">
-                  <div
-                    v-if="row.alert === 'warning'"
-                    class="icon-wrap clickable"
-                    @click="openAlert(row, 'warning')"
-                  >
-                    <div class="icon-wrapper-alert">
-                      <div class="icon-wrapper-2-alert">
-                        <div class="icon-alert"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    v-if="row.alert === 'error'"
-                    class="icon-wrap clickable"
-                    @click="openAlert(row, 'error')"
-                  >
-                    <div class="icon-wrapper-danger">
-                      <div class="icon-wrapper-2-danger">
-                        <div class="icon-danger"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {{ index + 1 }}
-                </div>
-              </td>
-              <td>{{ row.matkul }}</td>
-              <td>{{ row.sks }}</td>
-              <td>{{ row.kelas_baru || row.kelas }}</td>
-              <td>{{ row.dosen }}</td>
-              <td>{{ row.ruang_baru || row.ruang_lama }}</td>
-              <td>{{ row.jadwal_baru }}</td>
-              <td>
-                <button class="btn-presensi" @click="presensi(row)">
-                  Presensi
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="info">
+        <p class="info-label">Semester</p>
+        <p class="info-value">Ganjil</p>
       </div>
     </div>
 
-    <AlertDetails
-      v-if="showAlert"
-      :alert-type="selectedAlertType"
-      :data="selectedRow"
-      @close="showAlert = false"
-    />
+    <div class="alert alert-warning">
+      <div class="alert-header">
+        <div class="icon-wrap">
+          <div class="icon-wrapper-alert">
+            <div class="icon-wrapper-2-alert">
+              <div class="icon-alert"></div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <span class="alert-title">Terdapat Perubahan Jadwal</span>
+          <p class="alert-desc">
+            Cek perubahan jadwal pada Mata Kuliah dengan menekan tombol Icon
+            Danger pada tabel.
+          </p>
+        </div>
+      </div>
+    </div>
 
-    <NotificationJadwal
-      v-if="showNotification"
-      @close="showNotification = false"
-    />
+    <div class="alert alert-danger">
+      <div class="alert-header">
+        <div class="icon-wrap">
+          <div class="icon-wrapper-danger">
+            <div class="icon-wrapper-2-danger">
+              <div class="icon-danger"></div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <span class="alert-title">Terdapat Perubahan Kelas</span>
+          <p class="alert-desc">
+            Cek perubahan Kelas pada Mata Kuliah dengan menekan tombol Icon
+            Error pada tabel.
+          </p>
+        </div>
+      </div>
+    </div>
 
-    <PresensiSuccess
-      v-if="showPresensiSuccess"
-      @close="showPresensiSuccess = false"
-    />
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Mata Kuliah</th>
+            <th>SKS</th>
+            <th>Kelas</th>
+            <th>Nama Dosen</th>
+            <th>Ruang</th>
+            <th>Jam</th>
+            <th>Presensi</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="(row, index) in tableData" :key="index">
+            <td>
+              <div class="no">
+                <div
+                  v-if="row.alert === 'warning'"
+                  class="icon-wrap clickable"
+                  @click="openAlert(row, 'warning')"
+                >
+                  <div class="icon-wrapper-alert">
+                    <div class="icon-wrapper-2-alert">
+                      <div class="icon-alert"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  v-if="row.alert === 'error'"
+                  class="icon-wrap clickable"
+                  @click="openAlert(row, 'error')"
+                >
+                  <div class="icon-wrapper-danger">
+                    <div class="icon-wrapper-2-danger">
+                      <div class="icon-danger"></div>
+                    </div>
+                  </div>
+                </div>
+
+                {{ index + 1 }}
+              </div>
+            </td>
+            <td>{{ row.matkul }}</td>
+            <td>{{ row.sks }}</td>
+            <td>{{ row.kelas_baru || row.kelas }}</td>
+            <td>{{ row.dosen }}</td>
+            <td>{{ row.ruang_baru || row.ruang_lama }}</td>
+            <td>{{ row.jadwal_baru }}</td>
+            <td>
+              <button class="btn-presensi" @click="presensi(row)">
+                Presensi
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+
+  <AlertDetails
+    v-if="showAlert"
+    :alert-type="selectedAlertType"
+    :data="selectedRow"
+    @close="showAlert = false"
+  />
+
+  <NotificationJadwal
+    v-if="showNotification"
+    @close="showNotification = false"
+  />
+
+  <PresensiSuccess
+    v-if="showPresensiSuccess"
+    @close="showPresensiSuccess = false"
+  />
 </template>
 
 <script setup>
@@ -149,7 +147,7 @@ import NotificationJadwal from "../../components/notificationJadwal.vue";
 import PresensiSuccess from "../../components/presensiSuccess.vue";
 
 const showAlert = ref(false);
-const showNotification = ref(true);
+const showNotification = ref(false);
 const showPresensiSuccess = ref(false);
 const selectedAlertType = ref("warning");
 const selectedRow = ref(null);
@@ -204,34 +202,31 @@ function presensi(row) {
 }
 
 .page-inner {
-  width: 100%;
-  max-width: 430px;
+  max-width: 100%;
   margin: 0 auto;
+  background: #ffffff;
   border-radius: 25px;
   padding: 20px 16px 28px;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-  transition:
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  margin: 0;
 }
 
 .page-inner:hover {
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.15),
-    0 20px 45px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15), 0 20px 45px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
 }
 
 @media (min-width: 768px) {
   .page-inner {
-    max-width: 900px;
+    max-width: 100%;
     padding: 24px 24px 32px;
   }
 }
 
 @media (min-width: 1200px) {
   .page-inner {
-    max-width: 1100px;
+    max-width: 100%;
   }
 }
 
@@ -421,19 +416,5 @@ tr:hover {
 
 .btn-presensi:active {
   transform: scale(0.98);
-}
-
-@media (min-width: 768px) {
-  .title {
-    font-size: 32px;
-  }
-
-  table {
-    font-size: 14px;
-  }
-
-  th {
-    font-size: 13px;
-  }
 }
 </style>

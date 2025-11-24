@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <aside :class="['sidebar', { open: isSidebarOpen }]">
+    <aside
+      :class="['sidebar', { open: isSidebarOpen }]"
+      v-if="!$route.meta.hideLayout"
+    >
       <div class="logo">
         <img src="../src/assets/UMM_Logo.svg" alt="UMM Logo" />
       </div>
@@ -45,8 +48,8 @@
       </ul>
     </aside>
 
-    <main :class="{ full: !isSidebarOpen }">
-      <header class="header">
+    <main :class="{ full: $route.meta.hideLayout || !isSidebarOpen }">
+      <header class="header" v-if="!$route.meta.hideLayout">
         <button
           :class="['menu-toggle', { geser: !isSidebarOpen }]"
           @click="toggleSidebar"
@@ -70,7 +73,7 @@
       </div>
     </main>
 
-    <FloatingChat />
+    <FloatingChat v-if="!$route.meta.hideLayout" />
   </div>
 </template>
 
@@ -104,8 +107,7 @@ function logout() {
 
 <style scoped>
 .container {
-  display: flex;
-  height: 100vh;
+  padding: 0;
 }
 
 .sidebar {
@@ -210,12 +212,13 @@ p {
 
 main {
   margin-left: 100px;
-  width: 100%;
+  width: calc(100% - 100px);
   transition: 0.3s;
 }
 
 main.full {
   margin-left: 0;
+  width: 100%;
 }
 
 .header {
@@ -272,6 +275,7 @@ main.full {
   padding: 8px 0;
   border-radius: 8px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  z-index: 1;
 }
 
 .dropdown li {

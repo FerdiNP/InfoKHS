@@ -1,172 +1,171 @@
 <template>
-  <div class="page">
-    <div class="page-inner">
-      <h1 class="title">Profil</h1>
+  <div class="page-inner">
+    <h1 class="title">Profil</h1>
 
-      <form @submit.prevent="saveProfile" novalidate>
-        <section class="profile-section" aria-labelledby="biodata-heading">
-          <h2 id="biodata-heading" class="section-heading">Biodata</h2>
+    <form @submit.prevent="saveProfile" novalidate>
+      <section class="profile-section" aria-labelledby="biodata-heading">
+        <h2 id="biodata-heading" class="section-heading">Biodata</h2>
 
-          <div class="info-banner blue-banner" role="status" aria-live="polite">
-            <p>Isikan data berikut dengan data yang benar.</p>
+        <div class="info-banner blue-banner" role="status" aria-live="polite">
+          <p>Isikan data berikut dengan data yang benar.</p>
+        </div>
+
+        <div class="info-container">
+          <div class="info">
+            <p class="info-label">NIM</p>
+            <p class="info-value">{{ profile.nim }}</p>
           </div>
-
-          <div class="info-container">
-            <div class="info">
-              <p class="info-label">NIM</p>
-              <p class="info-value">{{ profile.nim }}</p>
-            </div>
-            <div class="info">
-              <p class="info-label">Nama</p>
-              <p class="info-value">{{ profile.nama }}</p>
-            </div>
-            <div class="info">
-              <p class="info-label">Fakultas</p>
-              <p class="info-value">{{ profile.fakultas }}</p>
-            </div>
-            <div class="info">
-              <p class="info-label">Program Studi</p>
-              <p class="info-value">{{ profile.prodi }}</p>
-            </div>
-            <div class="info">
-              <p class="info-label">Email UMM</p>
-              <p class="info-value">{{ profile.emailUmm }}</p>
-            </div>
+          <div class="info">
+            <p class="info-label">Nama</p>
+            <p class="info-value">{{ profile.nama }}</p>
           </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="emailAlt">Email Alternatif</label>
-              <input
-                id="emailAlt"
-                v-model.trim="form.emailAlt"
-                type="email"
-                class="form-input"
-                autocomplete="email"
-              />
-              <p v-if="errors.emailAlt" class="error-text">
-                {{ errors.emailAlt }}
-              </p>
-            </div>
-
-            <div class="form-group">
-              <label for="hp">No. HP</label>
-              <input
-                id="hp"
-                v-model="form.hp"
-                @input="sanitizeNumber('hp')"
-                inputmode="tel"
-                type="tel"
-                maxlength="15"
-                placeholder="08xxxxxxxxxx"
-                class="form-input"
-              />
-              <p v-if="errors.hp" class="error-text">{{ errors.hp }}</p>
-            </div>
-
-            <div class="form-group">
-              <label for="ktp">No. KTP/Passport Number</label>
-              <input
-                id="ktp"
-                v-model="form.ktp"
-                @input="sanitizeNumber('ktp')"
-                inputmode="numeric"
-                type="text"
-                maxlength="20"
-                class="form-input"
-              />
-              <p v-if="errors.ktp" class="error-text">{{ errors.ktp }}</p>
-            </div>
-
-            <div class="form-group form-group-full">
-              <label for="alamat">Alamat di Malang</label>
-              <input
-                id="alamat"
-                v-model.trim="form.alamat"
-                type="text"
-                class="form-input"
-              />
-              <p v-if="errors.alamat" class="error-text">
-                {{ errors.alamat }}
-              </p>
-            </div>
+          <div class="info">
+            <p class="info-label">Fakultas</p>
+            <p class="info-value">{{ profile.fakultas }}</p>
           </div>
-        </section>
+          <div class="info">
+            <p class="info-label">Program Studi</p>
+            <p class="info-value">{{ profile.prodi }}</p>
+          </div>
+          <div class="info">
+            <p class="info-label">Email UMM</p>
+            <p class="info-value">{{ profile.emailUmm }}</p>
+          </div>
+        </div>
 
-        <section class="profile-section mt-8" aria-labelledby="password-heading">
-          <h2 id="password-heading" class="section-heading">Password/PIC</h2>
-
-          <div class="info-banner blue-banner" role="status" aria-live="polite">
-            <p>
-              Kosongkan Password/PIC Baru jika tidak ingin mengganti Password/PIC anda.
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="emailAlt">Email Alternatif</label>
+            <input
+              id="emailAlt"
+              v-model.trim="form.emailAlt"
+              type="email"
+              class="form-input"
+              autocomplete="email"
+            />
+            <p v-if="errors.emailAlt" class="error-text">
+              {{ errors.emailAlt }}
             </p>
           </div>
 
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="passBaru">Password/PIC Baru</label>
-              <input
-                id="passBaru"
-                v-model="form.passBaru"
-                @input="sanitizeNumber('passBaru')"
-                inputmode="numeric"
-                type="password"
-                maxlength="20"
-                class="form-input"
-              />
-              <p v-if="errors.passBaru" class="error-text">
-                {{ errors.passBaru }}
-              </p>
-            </div>
-
-            <div class="form-group">
-              <label for="ulangiPass">Ulangi Password/PIC Baru</label>
-              <input
-                id="ulangiPass"
-                v-model="form.ulangiPass"
-                @input="sanitizeNumber('ulangiPass')"
-                inputmode="numeric"
-                type="password"
-                maxlength="20"
-                class="form-input"
-              />
-              <p v-if="errors.ulangiPass" class="error-text">
-                {{ errors.ulangiPass }}
-              </p>
-            </div>
-
-            <div class="form-group form-group-full helper-group">
-              <p class="helper-text">
-                Password/PIC harus angka dan minimal 8 digit
-              </p>
-            </div>
+          <div class="form-group">
+            <label for="hp">No. HP</label>
+            <input
+              id="hp"
+              v-model="form.hp"
+              @input="sanitizeNumber('hp')"
+              inputmode="tel"
+              type="tel"
+              maxlength="15"
+              placeholder="08xxxxxxxxxx"
+              class="form-input"
+            />
+            <p v-if="errors.hp" class="error-text">{{ errors.hp }}</p>
           </div>
-        </section>
 
-        <div class="action-buttons">
-          <button type="button" class="btn-outline" @click="goBack">
-            Kembali
-          </button>
-          <button
-            type="submit"
-            class="btn-primary"
-            :disabled="!isFormValid || saving"
-          >
-            <span v-if="!saving">Simpan</span>
-            <span v-else>...Menyimpan</span>
-          </button>
+          <div class="form-group">
+            <label for="ktp">No. KTP/Passport Number</label>
+            <input
+              id="ktp"
+              v-model="form.ktp"
+              @input="sanitizeNumber('ktp')"
+              inputmode="numeric"
+              type="text"
+              maxlength="20"
+              class="form-input"
+            />
+            <p v-if="errors.ktp" class="error-text">{{ errors.ktp }}</p>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label for="alamat">Alamat di Malang</label>
+            <input
+              id="alamat"
+              v-model.trim="form.alamat"
+              type="text"
+              class="form-input"
+            />
+            <p v-if="errors.alamat" class="error-text">
+              {{ errors.alamat }}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-section mt-8" aria-labelledby="password-heading">
+        <h2 id="password-heading" class="section-heading">Password/PIC</h2>
+
+        <div class="info-banner blue-banner" role="status" aria-live="polite">
+          <p>
+            Kosongkan Password/PIC Baru jika tidak ingin mengganti Password/PIC
+            anda.
+          </p>
         </div>
 
-        <div
-          v-if="successMessage"
-          class="success-banner"
-          role="status"
-          aria-live="polite"
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="passBaru">Password/PIC Baru</label>
+            <input
+              id="passBaru"
+              v-model="form.passBaru"
+              @input="sanitizeNumber('passBaru')"
+              inputmode="numeric"
+              type="password"
+              maxlength="20"
+              class="form-input"
+            />
+            <p v-if="errors.passBaru" class="error-text">
+              {{ errors.passBaru }}
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="ulangiPass">Ulangi Password/PIC Baru</label>
+            <input
+              id="ulangiPass"
+              v-model="form.ulangiPass"
+              @input="sanitizeNumber('ulangiPass')"
+              inputmode="numeric"
+              type="password"
+              maxlength="20"
+              class="form-input"
+            />
+            <p v-if="errors.ulangiPass" class="error-text">
+              {{ errors.ulangiPass }}
+            </p>
+          </div>
+
+          <div class="form-group form-group-full helper-group">
+            <p class="helper-text">
+              Password/PIC harus angka dan minimal 8 digit
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="action-buttons">
+        <button type="button" class="btn-outline" @click="goBack">
+          Kembali
+        </button>
+        <button
+          type="submit"
+          class="btn-primary"
+          :disabled="!isFormValid || saving"
         >
-          {{ successMessage }}
-        </div>
-      </form>
-    </div>
+          <span v-if="!saving">Simpan</span>
+          <span v-else>...Menyimpan</span>
+        </button>
+      </div>
+
+      <div
+        v-if="successMessage"
+        class="success-banner"
+        role="status"
+        aria-live="polite"
+      >
+        {{ successMessage }}
+      </div>
+    </form>
   </div>
 </template>
 
@@ -231,8 +230,7 @@ const validatePhone = (value) => {
 
 const validateKtp = (value) => {
   if (!value) return "No. KTP/Passport wajib diisi.";
-  if (!/^[0-9]{6,20}$/.test(value))
-    return "No. KTP harus angka (6-20 digit).";
+  if (!/^[0-9]{6,20}$/.test(value)) return "No. KTP harus angka (6-20 digit).";
   return "";
 };
 
@@ -262,10 +260,7 @@ const isFormValid = computed(() => {
   const vKtp = validateKtp(form.ktp) === "";
   const vAlamat = validateAlamat(form.alamat) === "";
   const vPass = validatePass(form.passBaru) === "";
-  const vRepeat = validateRepeatPass(
-    form.passBaru,
-    form.ulangiPass
-  ) === "";
+  const vRepeat = validateRepeatPass(form.passBaru, form.ulangiPass) === "";
   return vEmail && vHp && vKtp && vAlamat && vPass && vRepeat;
 });
 
@@ -275,10 +270,7 @@ const runAllValidation = () => {
   errors.ktp = validateKtp(form.ktp);
   errors.alamat = validateAlamat(form.alamat);
   errors.passBaru = validatePass(form.passBaru);
-  errors.ulangiPass = validateRepeatPass(
-    form.passBaru,
-    form.ulangiPass
-  );
+  errors.ulangiPass = validateRepeatPass(form.passBaru, form.ulangiPass);
 };
 
 const goBack = () => {
@@ -343,46 +335,31 @@ const saveProfile = async () => {
 }
 
 .page-inner {
-  width: 100%;
-  max-width: 430px;
+  max-width: 100%;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 25px;
   padding: 20px 16px 28px;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-  transition:
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  margin: 0;
 }
 
 .page-inner:hover {
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.15),
-    0 20px 45px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15), 0 20px 45px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
 }
 
 @media (min-width: 768px) {
   .page-inner {
-    max-width: 900px;
-    padding: 24px 24px 32px;
-  }
-
-  .profile-section {
     max-width: 100%;
-    margin: 0;
-  }
-
-  .form-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 20px;
-    row-gap: 18px;
+    padding: 24px 24px 32px;
   }
 }
 
 @media (min-width: 1200px) {
   .page-inner {
-    max-width: 1100px;
+    max-width: 100%;
   }
 }
 
@@ -486,9 +463,7 @@ const saveProfile = async () => {
   color: #111827;
   outline: none;
   background-color: #ffffff;
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
     background-color 0.15s ease;
 }
 
@@ -528,9 +503,7 @@ const saveProfile = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition:
-    background-color 0.18s ease,
-    transform 0.18s ease;
+  transition: background-color 0.18s ease, transform 0.18s ease;
 }
 
 .btn-outline {

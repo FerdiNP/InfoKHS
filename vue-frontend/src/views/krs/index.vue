@@ -1,103 +1,97 @@
 <template>
-  <div class="page">
-    <div class="page-inner">
-      <h1 class="title">Pemrograman KRS</h1>
+  <div class="page-inner">
+    <h1 class="title">Pemrograman KRS</h1>
 
-      <div class="info-container">
-        <div class="info">
-          <p class="info-label">NIM</p>
-          <p class="info-value">202210370311272</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Nama</p>
-          <p class="info-value">Gemilang Rizmart Samodra</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Tahun Akademik</p>
-          <p class="info-value">2025/2026</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Semester</p>
-          <p class="info-value">Ganjil</p>
-        </div>
+    <div class="info-container">
+      <div class="info">
+        <p class="info-label">NIM</p>
+        <p class="info-value">202210370311272</p>
       </div>
-
-      <div class="alert alert-warning">
-        <div class="alert-header">
-          <div class="icon-wrap">
-            <div class="icon-wrapper-alert">
-              <div class="icon-wrapper-2-alert">
-                <div class="icon-alert"></div>
-              </div>
-            </div>
-          </div>
-          <div class="content">
-            <span class="alert-title">Jadwal Kelas Belum Tersedia</span>
-            <p class="alert-desc">
-              Saat ini jadwal dari fakultas belum diunggah. Silakan cek kembali
-              setelah tanggal 20 Oktober 2025 atau hubungi admin program studi
-              jika masalah berlanjut.
-            </p>
-          </div>
-        </div>
+      <div class="info">
+        <p class="info-label">Nama</p>
+        <p class="info-value">Gemilang Rizmart Samodra</p>
       </div>
-
-      <div
-        v-for="(mk, index) in matkulList"
-        :key="mk.id"
-        class="course-card"
-      >
-        <button class="course-header" @click="toggleMatkul(index)">
-          <span class="course-title">
-            {{ mk.nama }} | Semester {{ mk.semester }} ({{ mk.sks }} SKS)
-          </span>
-          <span class="course-arrow" :class="{ open: mk.isOpen }">⌃</span>
-        </button>
-
-        <transition name="accordion">
-          <div v-if="mk.isOpen" class="course-body">
-            <div class="course-body-scroll">
-              <table class="krs-table">
-                <thead>
-                  <tr>
-                    <th>Kelas</th>
-                    <th>Jadwal</th>
-                    <th>Nilai</th>
-                    <th>Kuota</th>
-                    <th>Terisi</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(row, i) in mk.kelas" :key="i">
-                    <td>{{ row.kelas }}</td>
-                    <td>{{ row.jadwal }}</td>
-                    <td>{{ row.nilai || "-" }}</td>
-                    <td>{{ row.kuota }}</td>
-                    <td>{{ row.terisi }}</td>
-                    <td>
-                      <button
-                        v-if="!row.full"
-                        class="btn-pilih"
-                        @click="pilihKelas(mk, row)"
-                      >
-                        Pilih
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </transition>
+      <div class="info">
+        <p class="info-label">Tahun Akademik</p>
+        <p class="info-value">2025/2026</p>
+      </div>
+      <div class="info">
+        <p class="info-label">Semester</p>
+        <p class="info-value">Ganjil</p>
       </div>
     </div>
 
-    <JadwalKelasBelumTersedia
-      v-if="showJadwalModal"
-      @close="showJadwalModal = false"
-    />
+    <div class="alert alert-warning">
+      <div class="alert-header">
+        <div class="icon-wrap">
+          <div class="icon-wrapper-alert">
+            <div class="icon-wrapper-2-alert">
+              <div class="icon-alert"></div>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <span class="alert-title">Jadwal Kelas Belum Tersedia</span>
+          <p class="alert-desc">
+            Saat ini jadwal dari fakultas belum diunggah. Silakan cek kembali
+            setelah tanggal 20 Oktober 2025 atau hubungi admin program studi
+            jika masalah berlanjut.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div v-for="(mk, index) in matkulList" :key="mk.id" class="course-card">
+      <button class="course-header" @click="toggleMatkul(index)">
+        <span class="course-title">
+          {{ mk.nama }} | Semester {{ mk.semester }} ({{ mk.sks }} SKS)
+        </span>
+        <span class="course-arrow" :class="{ open: mk.isOpen }">⌃</span>
+      </button>
+
+      <transition name="accordion">
+        <div v-if="mk.isOpen" class="course-body">
+          <div class="course-body-scroll">
+            <table class="krs-table">
+              <thead>
+                <tr>
+                  <th>Kelas</th>
+                  <th>Jadwal</th>
+                  <th>Nilai</th>
+                  <th>Kuota</th>
+                  <th>Terisi</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(row, i) in mk.kelas" :key="i">
+                  <td>{{ row.kelas }}</td>
+                  <td>{{ row.jadwal }}</td>
+                  <td>{{ row.nilai || "-" }}</td>
+                  <td>{{ row.kuota }}</td>
+                  <td>{{ row.terisi }}</td>
+                  <td>
+                    <button
+                      v-if="!row.full"
+                      class="btn-pilih"
+                      @click="pilihKelas(mk, row)"
+                    >
+                      Pilih
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </transition>
+    </div>
   </div>
+
+  <JadwalKelasBelumTersedia
+    v-if="showJadwalModal"
+    @close="showJadwalModal = false"
+  />
 </template>
 
 <script setup>
@@ -116,8 +110,22 @@ const matkulList = ref([
     sks: 4,
     isOpen: true,
     kelas: [
-      { kelas: "A", jadwal: "Senin (3,4)", nilai: "", kuota: 50, terisi: 50, full: true },
-      { kelas: "B", jadwal: "Selasa (1,2)", nilai: "", kuota: 50, terisi: 50, full: true },
+      {
+        kelas: "A",
+        jadwal: "Senin (3,4)",
+        nilai: "",
+        kuota: 50,
+        terisi: 50,
+        full: true,
+      },
+      {
+        kelas: "B",
+        jadwal: "Selasa (1,2)",
+        nilai: "",
+        kuota: 50,
+        terisi: 50,
+        full: true,
+      },
       { kelas: "C", jadwal: "-", nilai: "", kuota: 50, terisi: 0, full: false },
       { kelas: "D", jadwal: "-", nilai: "", kuota: 50, terisi: 0, full: false },
     ],
@@ -129,7 +137,14 @@ const matkulList = ref([
     sks: 3,
     isOpen: false,
     kelas: [
-      { kelas: "A", jadwal: "Senin (7,8,9)", nilai: "", kuota: 50, terisi: 50, full: true },
+      {
+        kelas: "A",
+        jadwal: "Senin (7,8,9)",
+        nilai: "",
+        kuota: 50,
+        terisi: 50,
+        full: true,
+      },
       { kelas: "B", jadwal: "-", nilai: "", kuota: 50, terisi: 0, full: false },
       { kelas: "C", jadwal: "-", nilai: "", kuota: 50, terisi: 0, full: false },
       { kelas: "D", jadwal: "-", nilai: "", kuota: 50, terisi: 0, full: false },
@@ -142,8 +157,22 @@ const matkulList = ref([
     sks: 3,
     isOpen: false,
     kelas: [
-      { kelas: "A", jadwal: "Selasa (5,6)", nilai: "", kuota: 50, terisi: 50, full: true },
-      { kelas: "B", jadwal: "Kamis (1,2)", nilai: "", kuota: 50, terisi: 50, full: true },
+      {
+        kelas: "A",
+        jadwal: "Selasa (5,6)",
+        nilai: "",
+        kuota: 50,
+        terisi: 50,
+        full: true,
+      },
+      {
+        kelas: "B",
+        jadwal: "Kamis (1,2)",
+        nilai: "",
+        kuota: 50,
+        terisi: 50,
+        full: true,
+      },
       { kelas: "C", jadwal: "-", nilai: "", kuota: 50, terisi: 0, full: false },
       { kelas: "D", jadwal: "-", nilai: "", kuota: 50, terisi: 0, full: false },
     ],
@@ -155,7 +184,14 @@ const matkulList = ref([
     sks: 3,
     isOpen: false,
     kelas: [
-      { kelas: "A", jadwal: "Rabu (3,4)", nilai: "", kuota: 40, terisi: 40, full: true },
+      {
+        kelas: "A",
+        jadwal: "Rabu (3,4)",
+        nilai: "",
+        kuota: 40,
+        terisi: 40,
+        full: true,
+      },
       { kelas: "B", jadwal: "", nilai: "", kuota: 40, terisi: 0, full: false },
       { kelas: "C", jadwal: "-", nilai: "", kuota: 40, terisi: 0, full: false },
       { kelas: "D", jadwal: "-", nilai: "", kuota: 40, terisi: 0, full: false },
@@ -168,7 +204,14 @@ const matkulList = ref([
     sks: 2,
     isOpen: false,
     kelas: [
-      { kelas: "A", jadwal: "Senin (1,2)", nilai: "", kuota: 35, terisi: 35, full: true },
+      {
+        kelas: "A",
+        jadwal: "Senin (1,2)",
+        nilai: "",
+        kuota: 35,
+        terisi: 35,
+        full: true,
+      },
       { kelas: "B", jadwal: "", nilai: "", kuota: 35, terisi: 0, full: false },
       { kelas: "C", jadwal: "-", nilai: "", kuota: 35, terisi: 0, full: false },
       { kelas: "D", jadwal: "-", nilai: "", kuota: 35, terisi: 0, full: false },
@@ -198,35 +241,31 @@ function pilihKelas(mk, row) {
 }
 
 .page-inner {
-  width: 100%;
-  max-width: 430px;
+  max-width: 100%;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 25px;
   padding: 20px 16px 28px;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-  transition:
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  margin: 0;
 }
 
 .page-inner:hover {
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.15),
-    0 20px 45px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15), 0 20px 45px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
 }
 
 @media (min-width: 768px) {
   .page-inner {
-    max-width: 900px;
+    max-width: 100%;
     padding: 24px 24px 32px;
   }
 }
 
 @media (min-width: 1200px) {
   .page-inner {
-    max-width: 1100px;
+    max-width: 100%;
   }
 }
 

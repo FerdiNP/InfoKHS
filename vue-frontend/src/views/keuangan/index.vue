@@ -1,317 +1,306 @@
 <template>
-  <div class="page">
-    <div class="page-inner">
-      <h1 class="title">Keuangan</h1>
+  <div class="page-inner">
+    <h1 class="title">Keuangan</h1>
 
-      <div class="info-container">
-        <div class="info">
-          <p class="info-label">NIM</p>
-          <p class="info-value">202210370311272</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Nama</p>
-          <p class="info-value">Gemilang Rizmart Samopdra</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Jenjang</p>
-          <p class="info-value">S-1</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Jenis Biaya</p>
-          <p class="info-value">Regular Gelombang 1</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Beasiswa</p>
-          <p class="info-value">Jalur Prestasi 100% SPP smt 1</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Semester Pembayaran</p>
-          <p class="info-value">7</p>
-        </div>
+    <div class="info-container">
+      <div class="info">
+        <p class="info-label">NIM</p>
+        <p class="info-value">202210370311272</p>
       </div>
-
-      <div class="status-banner">
-        <div class="status-icon-wrapper">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M20 6L9 17l-5-5" />
-          </svg>
-        </div>
-        <div class="status-text">
-          <h3>SISTEM PEMBAYARAN LANCAR</h3>
-          <p>Transaksi dapat dilakukan seperti biasa tanpa kendala.</p>
-        </div>
+      <div class="info">
+        <p class="info-label">Nama</p>
+        <p class="info-value">Gemilang Rizmart Samopdra</p>
       </div>
+      <div class="info">
+        <p class="info-label">Jenjang</p>
+        <p class="info-value">S-1</p>
+      </div>
+      <div class="info">
+        <p class="info-label">Jenis Biaya</p>
+        <p class="info-value">Regular Gelombang 1</p>
+      </div>
+      <div class="info">
+        <p class="info-label">Beasiswa</p>
+        <p class="info-value">Jalur Prestasi 100% SPP smt 1</p>
+      </div>
+      <div class="info">
+        <p class="info-label">Semester Pembayaran</p>
+        <p class="info-value">7</p>
+      </div>
+    </div>
 
-      <div class="payment-section">
-        <h2 class="section-title">Pembayaran Semester 7</h2>
+    <div class="status-banner">
+      <div class="status-icon-wrapper">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      </div>
+      <div class="status-text">
+        <h3>SISTEM PEMBAYARAN LANCAR</h3>
+        <p>Transaksi dapat dilakukan seperti biasa tanpa kendala.</p>
+      </div>
+    </div>
 
-        <div class="table-scroll-wrapper">
-          <div class="table-min-width">
-            <div class="table-row header-row">
-              <div class="col-cell col-status">Lunas</div>
-              <div class="col-cell col-desc">Jenis Biaya</div>
-              <div class="col-cell col-money">Tagihan</div>
-              <div class="col-cell col-money">Sudah Dibayarkan</div>
-              <div class="col-cell col-money">Kekurangan</div>
-              <div class="col-cell col-action"></div>
-            </div>
+    <div class="payment-section">
+      <h2 class="section-title">Pembayaran Semester 7</h2>
 
-            <div class="payment-list">
-              <div
-                class="table-row body-row"
-                v-for="(pay, index) in payments"
-                :key="pay.id"
-              >
-                <div class="col-cell col-status">
-                  <div
-                    v-if="pay.status === 'paid'"
-                    class="icon-circle success"
-                    aria-hidden="true"
+      <div class="table-scroll-wrapper">
+        <div class="table-min-width">
+          <div class="table-row header-row">
+            <div class="col-cell col-status">Lunas</div>
+            <div class="col-cell col-desc">Jenis Biaya</div>
+            <div class="col-cell col-money">Tagihan</div>
+            <div class="col-cell col-money">Sudah Dibayarkan</div>
+            <div class="col-cell col-money">Kekurangan</div>
+            <div class="col-cell col-action"></div>
+          </div>
+
+          <div class="payment-list">
+            <div
+              class="table-row body-row"
+              v-for="(pay, index) in payments"
+              :key="pay.id"
+            >
+              <div class="col-cell col-status">
+                <div
+                  v-if="pay.status === 'paid'"
+                  class="icon-circle success"
+                  aria-hidden="true"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
                   >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg>
-                  </div>
-                  <div v-else class="icon-circle danger" aria-hidden="true">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                  </div>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
                 </div>
-
-                <div class="col-cell col-desc">
-                  <h4 class="pay-title">{{ pay.title }}</h4>
-                  <p class="pay-subtitle">{{ pay.desc }}</p>
-                </div>
-
-                <div class="col-cell col-money">
-                  <span class="money-text">{{ pay.tagihan }}</span>
-                </div>
-                <div class="col-cell col-money">
-                  <span class="money-text text-muted">{{ pay.terbayar }}</span>
-                </div>
-                <div class="col-cell col-money">
-                  <span class="money-text">{{ pay.kekurangan }}</span>
-                </div>
-
-                <div class="col-cell col-action">
-                  <button
-                    v-if="pay.status !== 'paid'"
-                    @click="openPaymentModal(pay)"
-                    class="btn-bayar"
+                <div v-else class="icon-circle danger" aria-hidden="true">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
                   >
-                    Bayar
-                  </button>
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
                 </div>
+              </div>
+
+              <div class="col-cell col-desc">
+                <h4 class="pay-title">{{ pay.title }}</h4>
+                <p class="pay-subtitle">{{ pay.desc }}</p>
+              </div>
+
+              <div class="col-cell col-money">
+                <span class="money-text">{{ pay.tagihan }}</span>
+              </div>
+              <div class="col-cell col-money">
+                <span class="money-text text-muted">{{ pay.terbayar }}</span>
+              </div>
+              <div class="col-cell col-money">
+                <span class="money-text">{{ pay.kekurangan }}</span>
+              </div>
+
+              <div class="col-cell col-action">
+                <button
+                  v-if="pay.status !== 'paid'"
+                  @click="openPaymentModal(pay)"
+                  class="btn-bayar"
+                >
+                  Bayar
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div
-      v-if="isPaymentModalOpen"
-      class="modal-overlay"
-      @click.self="closePaymentModal"
-    >
-      <div class="modal-card" role="dialog" aria-modal="true">
-        <div class="modal-icon-top purple-icon">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-            <line x1="1" y1="10" x2="23" y2="10"></line>
-          </svg>
-        </div>
-        <h3 class="modal-title">Metode Pembayaran</h3>
-        <p class="modal-subtitle">Masukkan data pembayaran anda</p>
-
-        <div class="modal-form">
-          <div class="form-group">
-            <label>Name on card</label>
-            <input
-              v-model="cardName"
-              type="text"
-              class="form-input"
-              placeholder="Masukkan nama anda"
-            />
-          </div>
-          <div class="form-group">
-            <label>Metode Pembayaran</label>
-            <div class="select-wrapper">
-              <span class="input-icon">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <rect
-                    x="1"
-                    y="4"
-                    width="22"
-                    height="16"
-                    rx="2"
-                    ry="2"
-                  ></rect>
-                  <circle cx="9" cy="14" r="2"></circle>
-                  <circle cx="15" cy="14" r="2"></circle>
-                </svg>
-              </span>
-              <select v-model="method" class="form-input with-icon">
-                <option value="bca">BCA Virtual Account</option>
-                <option value="gopay">GoPay</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group half">
-              <label>CVV</label>
-              <input
-                v-model="cvv"
-                type="text"
-                class="form-input"
-                placeholder="***"
-              />
-            </div>
-            <div class="form-group half">
-              <label>Expiry</label>
-              <input
-                v-model="expiry"
-                type="text"
-                class="form-input"
-                placeholder="MM / YY"
-              />
-            </div>
-          </div>
-        </div>
-
-        <button class="btn-confirm" @click="proceedToVerification">
-          Confirm
-        </button>
-        <button class="btn-cancel" @click="closePaymentModal">Cancel</button>
+  <div
+    v-if="isPaymentModalOpen"
+    class="modal-overlay"
+    @click.self="closePaymentModal"
+  >
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <div class="modal-icon-top purple-icon">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+          <line x1="1" y1="10" x2="23" y2="10"></line>
+        </svg>
       </div>
-    </div>
+      <h3 class="modal-title">Metode Pembayaran</h3>
+      <p class="modal-subtitle">Masukkan data pembayaran anda</p>
 
-    <div
-      v-if="isVerificationOpen"
-      class="modal-overlay"
-      @click.self="closeVerification"
-    >
-      <div class="modal-card text-center" role="dialog" aria-modal="true">
-        <div class="modal-icon-top purple-icon mx-auto">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-            ></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-        </div>
-        <h3 class="modal-title">Verifikasi</h3>
-        <p class="modal-subtitle">
-          Masukkan kode yang dikirimkan pada SMS anda.
-        </p>
-
-        <div class="otp-container">
+      <div class="modal-form">
+        <div class="form-group">
+          <label>Name on card</label>
           <input
-            v-for="(digit, index) in otpCode"
-            :key="index"
+            v-model="cardName"
             type="text"
-            inputmode="numeric"
-            maxlength="1"
-            class="otp-input"
-            v-model="otpCode[index]"
-            @input="handleOtpInput($event, index)"
-            @keydown="handleOtpKeydown($event, index)"
-            :ref="el => (otpInputs[index] = el)"
-            autocomplete="one-time-code"
+            class="form-input"
+            placeholder="Masukkan nama anda"
           />
         </div>
-        <div class="resend-text">
-          Didn't get a code?
-          <a href="#" @click.prevent="resendOtp">Click to resend.</a>
+        <div class="form-group">
+          <label>Metode Pembayaran</label>
+          <div class="select-wrapper">
+            <span class="input-icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <circle cx="9" cy="14" r="2"></circle>
+                <circle cx="15" cy="14" r="2"></circle>
+              </svg>
+            </span>
+            <select v-model="method" class="form-input with-icon">
+              <option value="bca">BCA Virtual Account</option>
+              <option value="gopay">GoPay</option>
+            </select>
+          </div>
         </div>
-
-        <button class="btn-confirm" @click="finishPayment">Confirm</button>
-        <button class="btn-cancel" @click="closeVerification">Cancel</button>
+        <div class="form-row">
+          <div class="form-group half">
+            <label>CVV</label>
+            <input
+              v-model="cvv"
+              type="text"
+              class="form-input"
+              placeholder="***"
+            />
+          </div>
+          <div class="form-group half">
+            <label>Expiry</label>
+            <input
+              v-model="expiry"
+              type="text"
+              class="form-input"
+              placeholder="MM / YY"
+            />
+          </div>
+        </div>
       </div>
+
+      <button class="btn-confirm" @click="proceedToVerification">
+        Confirm
+      </button>
+      <button class="btn-cancel" @click="closePaymentModal">Cancel</button>
     </div>
+  </div>
 
-    <div
-      v-if="isSuccessOpen"
-      class="modal-overlay"
-      @click.self="isSuccessOpen = false"
-    >
-      <div
-        class="modal-card text-center"
-        style="padding-top: 40px; padding-bottom: 40px"
-      >
-        <div class="success-icon-wrapper mx-auto">
-          <svg
-            width="40"
-            height="40"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-        </div>
-
-        <h3 class="modal-title mt-4">Pembayaran Berhasil</h3>
-        <p
-          class="modal-subtitle mt-2"
-          style="
-            max-width: 280px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-          "
+  <div
+    v-if="isVerificationOpen"
+    class="modal-overlay"
+    @click.self="closeVerification"
+  >
+    <div class="modal-card text-center" role="dialog" aria-modal="true">
+      <div class="modal-icon-top purple-icon mx-auto">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
         >
-          Transaksi telah diterima dan diverifikasi oleh sistem. Anda akan
-          kembali ke halaman Keuangan secara otomatis.
-        </p>
+          <path
+            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+          ></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
       </div>
+      <h3 class="modal-title">Verifikasi</h3>
+      <p class="modal-subtitle">Masukkan kode yang dikirimkan pada SMS anda.</p>
+
+      <div class="otp-container">
+        <input
+          v-for="(digit, index) in otpCode"
+          :key="index"
+          type="text"
+          inputmode="numeric"
+          maxlength="1"
+          class="otp-input"
+          v-model="otpCode[index]"
+          @input="handleOtpInput($event, index)"
+          @keydown="handleOtpKeydown($event, index)"
+          :ref="(el) => (otpInputs[index] = el)"
+          autocomplete="one-time-code"
+        />
+      </div>
+      <div class="resend-text">
+        Didn't get a code?
+        <a href="#" @click.prevent="resendOtp">Click to resend.</a>
+      </div>
+
+      <button class="btn-confirm" @click="finishPayment">Confirm</button>
+      <button class="btn-cancel" @click="closeVerification">Cancel</button>
+    </div>
+  </div>
+
+  <div
+    v-if="isSuccessOpen"
+    class="modal-overlay"
+    @click.self="isSuccessOpen = false"
+  >
+    <div
+      class="modal-card text-center"
+      style="padding-top: 40px; padding-bottom: 40px"
+    >
+      <div class="success-icon-wrapper mx-auto">
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <h3 class="modal-title mt-4">Pembayaran Berhasil</h3>
+      <p
+        class="modal-subtitle mt-2"
+        style="
+          max-width: 280px;
+          margin-left: auto;
+          margin-right: auto;
+          line-height: 1.6;
+        "
+      >
+        Transaksi telah diterima dan diverifikasi oleh sistem. Anda akan kembali
+        ke halaman Keuangan secara otomatis.
+      </p>
     </div>
   </div>
 </template>
@@ -507,27 +496,43 @@ onBeforeUnmount(() => {
 }
 
 .page-inner {
-  width: 100%;
-  max-width: 430px;
+  max-width: 100%;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 25px;
   padding: 20px 16px 28px;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-  transition:
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  margin: 0;
 }
 
 .page-inner:hover {
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15), 0 20px 45px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
 }
 
 @media (min-width: 768px) {
   .page-inner {
-    max-width: 1200px;
+    max-width: 100%;
     padding: 24px 24px 32px;
+  }
+
+  .table-min-width {
+    min-width: 100%;
+  }
+
+  .table-scroll-wrapper {
+    overflow-x: visible;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-inner {
+    max-width: 100%;
   }
 }
 
@@ -943,29 +948,5 @@ onBeforeUnmount(() => {
   text-decoration: underline;
   font-weight: 600;
   cursor: pointer;
-}
-
-@media (min-width: 768px) {
-  .page-inner {
-    max-width: 900px;
-  }
-
-  .table-min-width {
-    min-width: 100%;
-  }
-
-  .table-scroll-wrapper {
-    overflow-x: visible;
-  }
-
-  .title {
-    font-size: 32px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .page-inner {
-    max-width: 1100px;
-  }
 }
 </style>

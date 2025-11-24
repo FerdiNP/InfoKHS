@@ -1,7 +1,6 @@
 <template>
   <div class="page">
     <section class="login-box">
-
       <!-- <img
         src="/mnt/data/watermark-logo-umm.jpg"
         class="logo"
@@ -15,12 +14,7 @@
       <p class="subtitle">Universitas Muhammadiyah Malang</p>
 
       <form class="form" @submit.prevent="handleSubmit">
-        <input
-          v-model="form.nim"
-          type="text"
-          placeholder="NIM"
-          class="input"
-        />
+        <input v-model="form.nim" type="text" placeholder="NIM" class="input" />
 
         <input
           v-model="form.pic"
@@ -33,27 +27,29 @@
       </form>
 
       <p class="footer">
-        Tetap rahasiakan PIC anda meskipun dari teman terdekat, pastikan log
-        out setelah transaksi, tetap jaga kerahasiaan identitas pribadi anda
-        (KTM, KTP, Kartu Keluarga) dari pihak yang menghubungi dan
-        mengatasnamakan UMM. Segera lapor ke BAA-AIK UMM jika terjadi
-        penyalahgunaan.
+        Tetap rahasiakan PIC anda meskipun dari teman terdekat, pastikan log out
+        setelah transaksi, tetap jaga kerahasiaan identitas pribadi anda (KTM,
+        KTP, Kartu Keluarga) dari pihak yang menghubungi dan mengatasnamakan
+        UMM. Segera lapor ke BAA-AIK UMM jika terjadi penyalahgunaan.
       </p>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const form = ref({
-  nim: '',
-  pic: ''
-})
+  nim: "",
+  pic: "",
+});
 
 const handleSubmit = () => {
-  console.log('Login clicked')
-}
+  router.push("/profile");
+};
 </script>
 
 <style scoped>

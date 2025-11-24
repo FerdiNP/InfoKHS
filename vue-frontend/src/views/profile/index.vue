@@ -48,62 +48,60 @@ const chartOptions = {
 </script>
 
 <template>
-  <div class="page">
-    <div class="page-inner">
-      <h1 class="title">Profil</h1>
+  <div class="page-inner">
+    <h1 class="title">Profil</h1>
 
-      <div class="card bio-card">
-        <h3 class="student-name">Ferdi Naufal Prasetyo</h3>
+    <div class="card bio-card">
+      <h3 class="student-name">Ferdi Naufal Prasetyo</h3>
 
-        <ul class="bio-list">
-          <li class="bio-row">
-            <span class="bio-icon">💳</span>
-            <span class="bio-text">202210370311272</span>
-          </li>
-          <li class="bio-row">
-            <span class="bio-icon">🏛️</span>
-            <span class="bio-text">Fakultas Teknik</span>
-          </li>
-          <li class="bio-row">
-            <span class="bio-icon">📍</span>
-            <span class="bio-text">Program Studi Informatika</span>
-          </li>
-          <li class="bio-row">
-            <span class="bio-icon">📞</span>
-            <span class="bio-text">08123456789</span>
-          </li>
-          <li class="bio-row">
-            <span class="bio-icon">✉️</span>
-            <span class="bio-text">ferdinaufal6809@gmail.com</span>
-          </li>
-          <li class="bio-row">
-            <span class="bio-icon">📧</span>
-            <span class="bio-text">ferdinaufal@webmail.umm.ac.id</span>
-          </li>
-        </ul>
+      <ul class="bio-list">
+        <li class="bio-row">
+          <span class="bio-icon">💳</span>
+          <span class="bio-text">202210370311272</span>
+        </li>
+        <li class="bio-row">
+          <span class="bio-icon">🏛️</span>
+          <span class="bio-text">Fakultas Teknik</span>
+        </li>
+        <li class="bio-row">
+          <span class="bio-icon">📍</span>
+          <span class="bio-text">Program Studi Informatika</span>
+        </li>
+        <li class="bio-row">
+          <span class="bio-icon">📞</span>
+          <span class="bio-text">08123456789</span>
+        </li>
+        <li class="bio-row">
+          <span class="bio-icon">✉️</span>
+          <span class="bio-text">ferdinaufal6809@gmail.com</span>
+        </li>
+        <li class="bio-row">
+          <span class="bio-icon">📧</span>
+          <span class="bio-text">ferdinaufal@webmail.umm.ac.id</span>
+        </li>
+      </ul>
 
-        <div class="edit-btn-wrap">
-          <router-link to="/edit-profile">
-            <button class="edit-btn">Edit Profile</button>
-          </router-link>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2 class="card-title">Index Prestasi (IP)</h2>
-        <p class="card-subtitle">Riwayat IP per semester.</p>
-
-        <div class="chart-wrapper">
-          <Bar :data="chartData" :options="chartOptions" />
-        </div>
+      <div class="edit-btn-wrap">
+        <router-link to="/edit-profile">
+          <button class="edit-btn">Edit Profile</button>
+        </router-link>
       </div>
     </div>
 
-    <NotificationJadwal
-      v-if="showNotification"
-      @close="showNotification = false"
-    />
+    <div class="card">
+      <h2 class="card-title">Index Prestasi (IP)</h2>
+      <p class="card-subtitle">Riwayat IP per semester.</p>
+
+      <div class="chart-wrapper">
+        <Bar :data="chartData" :options="chartOptions" />
+      </div>
+    </div>
   </div>
+
+  <NotificationJadwal
+    v-if="showNotification"
+    @close="showNotification = false"
+  />
 </template>
 
 <style scoped>
@@ -111,45 +109,32 @@ const chartOptions = {
   box-sizing: border-box;
 }
 
-.page {
-  width: 100%;
-  padding: 24px 16px 40px;
-  display: flex;
-  justify-content: center;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #1f2937;
-}
-
 .page-inner {
-  width: 100%;
-  max-width: 430px;
+  max-width: 100%;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 25px;
   padding: 20px 16px 28px;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-  transition:
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  margin: 0;
 }
 
 .page-inner:hover {
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.15),
-    0 20px 45px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15), 0 20px 45px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
 }
 
 @media (min-width: 768px) {
   .page-inner {
-    max-width: 900px;
+    max-width: 100%;
     padding: 24px 24px 32px;
   }
 }
 
 @media (min-width: 1200px) {
   .page-inner {
-    max-width: 1100px;
+    max-width: 100%;
   }
 }
 
@@ -235,9 +220,7 @@ const chartOptions = {
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition:
-    background-color 0.18s ease,
-    transform 0.18s ease,
+  transition: background-color 0.18s ease, transform 0.18s ease,
     box-shadow 0.18s ease;
 }
 

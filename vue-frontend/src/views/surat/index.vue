@@ -1,70 +1,68 @@
 <template>
-  <div class="page">
-    <div class="page-inner">
-      <h1 class="title">{{ pageTitle }}</h1>
+  <div class="page-inner">
+    <h1 class="title">{{ pageTitle }}</h1>
 
-      <div class="info-container">
-        <div class="info">
-          <p class="info-label">NIM</p>
-          <p class="info-value">{{ mahasiswa.nim }}</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Nama</p>
-          <p class="info-value">{{ mahasiswa.nama }}</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Fakultas</p>
-          <p class="info-value">{{ mahasiswa.fakultas }}</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Program Studi</p>
-          <p class="info-value">{{ mahasiswa.prodi }}</p>
-        </div>
-        <div class="info">
-          <p class="info-label">Status</p>
-          <p class="info-value status">{{ mahasiswa.status }}</p>
-        </div>
+    <div class="info-container">
+      <div class="info">
+        <p class="info-label">NIM</p>
+        <p class="info-value">{{ mahasiswa.nim }}</p>
       </div>
-
-      <section class="stats">
-        <div class="stats-card">
-          <div class="stats-label">Total Cuti</div>
-          <div class="stats-value">{{ jumlahCuti }}</div>
-        </div>
-        <div class="stats-card">
-          <div class="stats-label">Total Aktif Kembali</div>
-          <div class="stats-value">{{ jumlahAktif }}</div>
-        </div>
-      </section>
-
-      <LayananHome
-        v-if="view === 'home'"
-        @go-cuti="goToCuti"
-        @go-aktif="goToAktif"
-      />
-
-      <CutiSection
-        v-else-if="view === 'cuti'"
-        :items="tabelCuti"
-        @back="goHome"
-      />
-
-      <AktifSection
-        v-else-if="view === 'aktif'"
-        :items="tabelAktif"
-        @back="goHome"
-      />
-
-      <section v-if="showHelp" class="card help-card">
-        <div class="help-title">Bantuan Layanan</div>
-        <p class="help-text">
-          • Pilih menu <b>Cuti</b> atau <b>Aktif Kembali</b> untuk melihat riwayat.<br />
-          • Gunakan kolom pencarian untuk menyaring data.<br />
-          • Klik baris tabel untuk melihat detail riwayat.
-        </p>
-      </section>
+      <div class="info">
+        <p class="info-label">Nama</p>
+        <p class="info-value">{{ mahasiswa.nama }}</p>
+      </div>
+      <div class="info">
+        <p class="info-label">Fakultas</p>
+        <p class="info-value">{{ mahasiswa.fakultas }}</p>
+      </div>
+      <div class="info">
+        <p class="info-label">Program Studi</p>
+        <p class="info-value">{{ mahasiswa.prodi }}</p>
+      </div>
+      <div class="info">
+        <p class="info-label">Status</p>
+        <p class="info-value status">{{ mahasiswa.status }}</p>
+      </div>
     </div>
 
+    <section class="stats">
+      <div class="stats-card">
+        <div class="stats-label">Total Cuti</div>
+        <div class="stats-value">{{ jumlahCuti }}</div>
+      </div>
+      <div class="stats-card">
+        <div class="stats-label">Total Aktif Kembali</div>
+        <div class="stats-value">{{ jumlahAktif }}</div>
+      </div>
+    </section>
+
+    <LayananHome
+      v-if="view === 'home'"
+      @go-cuti="goToCuti"
+      @go-aktif="goToAktif"
+    />
+
+    <CutiSection
+      v-else-if="view === 'cuti'"
+      :items="tabelCuti"
+      @back="goHome"
+    />
+
+    <AktifSection
+      v-else-if="view === 'aktif'"
+      :items="tabelAktif"
+      @back="goHome"
+    />
+
+    <section v-if="showHelp" class="card help-card">
+      <div class="help-title">Bantuan Layanan</div>
+      <p class="help-text">
+        • Pilih menu <b>Cuti</b> atau <b>Aktif Kembali</b> untuk melihat
+        riwayat.<br />
+        • Gunakan kolom pencarian untuk menyaring data.<br />
+        • Klik baris tabel untuk melihat detail riwayat.
+      </p>
+    </section>
   </div>
 </template>
 
@@ -125,35 +123,31 @@ const goToAktif = () => {
 }
 
 .page-inner {
-  width: 100%;
-  max-width: 430px;
+  max-width: 100%;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 25px;
   padding: 20px 16px 28px;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-  transition:
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  margin: 0;
 }
 
 .page-inner:hover {
-  box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.15),
-    0 20px 45px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15), 0 20px 45px rgba(0, 0, 0, 0.12);
   transform: translateY(-2px);
 }
 
 @media (min-width: 768px) {
   .page-inner {
-    max-width: 900px;
+    max-width: 100%;
     padding: 24px 24px 32px;
   }
 }
 
 @media (min-width: 1200px) {
   .page-inner {
-    max-width: 1100px;
+    max-width: 100%;
   }
 }
 
@@ -238,9 +232,7 @@ const goToAktif = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition:
-    background-color 0.15s ease,
-    transform 0.15s ease,
+  transition: background-color 0.15s ease, transform 0.15s ease,
     box-shadow 0.15s ease;
 }
 
@@ -362,9 +354,7 @@ const goToAktif = () => {
   cursor: pointer;
   padding: 6px 14px;
   color: #1976d2;
-  transition:
-    background-color 0.18s ease,
-    transform 0.18s ease,
+  transition: background-color 0.18s ease, transform 0.18s ease,
     box-shadow 0.18s ease;
 }
 
