@@ -13,3 +13,12 @@
 ## Low Fidelity Prototype
 [Low Fidelity Mockup](Low%20Fidelity/)
 ## Tabel Pembagian Tugas (Backlog)
+| InfoKHS | | | | | | | |
+|------------|-------|--------|-----|----------------|----------|--------|---------|
+| Agile Role | Login | Profil | KRS | Jadwal Kuliah | Keuangan | Surat | Chatbot |
+| **Product Owner** | Marcell Leeviroy | Syarif Hermawan | Ferdi Naufal P | Gemilang Rizmart S | Ferdhant Arya E | Marcell Leeviroy | Syarif Hermawan |
+| **Scrum Master** | Ferdi Naufal P | Syarif Hermawan | Ferdi Naufal P | Gemilang Rizmart S | Ferdhant Arya E | Marcell Leeviroy | Syarif Hermawan |
+| **Tim Pengembang** | Marcell Leeviroy | Syarif Hermawan | Ferdi Naufal P | Gemilang Rizmart S | Ferdhant Arya E | Marcell Leeviroy | Syarif Hermawan |
+| | Gemilang Rizmart S | Ferdhant Arya E | Gemilang Rizmart S | Ferdi Naufal P | Ferdi Naufal P | Ferdi Naufal P | |
+| | | Ferdi Naufal P | | | | | |
+
