@@ -80,7 +80,6 @@ class SuratController extends Controller
     {
         $q = PengajuanSurat::with(['mahasiswa', 'jenisSurat']);
 
-        // ✅ support filter dari Vue: params { mahasiswa_id: 1 }
         if ($request->filled('mahasiswa_id')) {
             $q->where('mahasiswa_id', $request->mahasiswa_id);
         }
@@ -100,7 +99,7 @@ class SuratController extends Controller
     public function storePengajuanSurat(Request $request)
     {
         $data = $request->validate([
-            // ⚠️ kalau tabelmu plural, ganti mahasiswa -> mahasiswas, jenis_surat -> jenis_surats
+           
             'mahasiswa_id'    => 'required|exists:mahasiswa,id',
             'jenis_surat_id'  => 'required|exists:jenis_surat,id',
 
@@ -115,7 +114,6 @@ class SuratController extends Controller
         $data['status'] = $data['status'] ?? 'PENDING';
         $pengajuan = PengajuanSurat::create($data);
 
-        // return yang sudah include relasi juga
         $pengajuan = PengajuanSurat::with(['mahasiswa', 'jenisSurat'])->find($pengajuan->id);
 
         return response()->json($pengajuan, 201);
@@ -133,7 +131,6 @@ class SuratController extends Controller
             'jenis_surat_id'  => 'sometimes|exists:jenis_surat,id',
             'tgl_pengajuan'   => 'sometimes|date',
 
-            // nullable boleh dipakai walau "sometimes" atau tidak
             'keterangan_mhs'  => 'nullable|string',
             'status'          => 'sometimes|string|max:50',
             'tgl_disetujui'   => 'nullable|date',
@@ -159,7 +156,7 @@ class SuratController extends Controller
     }
 
     // =========================
-    // APPROVE / REJECT (PATCH)
+    // DISETUJUI / DITOLAK
     // =========================
     public function approve(Request $request, $id)
     {

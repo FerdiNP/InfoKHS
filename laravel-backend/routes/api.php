@@ -1,25 +1,21 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Api\JadwalController;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\SuratController;
 use App\Http\Controllers\Api\MahasiswaController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SuratController;
 
-// JADWAL (dirapikan)
-Route::apiResource('/jadwal', JadwalController::class)->except(['index', 'destroy']);
-Route::get('/stream/jadwal', [JadwalController::class, 'stream']);
+Route::apiResource('/Jadwal', JadwalController::class)->except(['index', 'destroy']);
+Route::apiResource('/mahasiswa', MahasiswaController::class)->except(['show']);
 
-// USER
-Route::apiResource('/user', UserController::class)->except(['show']);
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/register', [UserController::class, 'store']);
+// buat route khusus login & register
+Route::post('/login', [MahasiswaController::class, 'login']);     // login
+Route::post('/register', [MahasiswaController::class, 'store']);    // register
+Route::put('/presensi', [JadwalController::class, 'presensi']);
 
-// =========================
+
 // SURAT
-// =========================
-
 // jenis surat
 Route::get('/jenis-surat', [SuratController::class, 'indexJenisSurat']);
 Route::post('/jenis-surat', [SuratController::class, 'storeJenisSurat']);
@@ -37,5 +33,4 @@ Route::delete('/pengajuan-surat/{id}', [SuratController::class, 'destroyPengajua
 Route::patch('/pengajuan-surat/{id}/approve', [SuratController::class, 'approve']);
 Route::patch('/pengajuan-surat/{id}/reject', [SuratController::class, 'reject']);
 
-// MAHASISWA
-Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show']);
+
