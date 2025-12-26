@@ -86,7 +86,6 @@ const handleSubmit = async () => {
 
 <style scoped>
 .login-page {
-  height: 95vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -107,7 +106,7 @@ const handleSubmit = async () => {
 }
 
 .logo {
-  width: 350px;
+  width: 100%;
   margin: 0 auto 10px;
 }
 

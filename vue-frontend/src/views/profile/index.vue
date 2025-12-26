@@ -24,8 +24,7 @@ onMounted(() => {
     user.value = JSON.parse(storedUser);
   }
   const storedJadwal = localStorage.getItem("jadwal");
-
-  if (storedJadwal) {
+  if (storedJadwal != "undefined") {
     jadwal.value = JSON.parse(storedJadwal);
     for (let i = 0; i < jadwal.value.length; i++) {
       if (
@@ -226,6 +225,7 @@ const chartOptions = {
 
 .bio-text {
   flex: 1;
+  overflow: hidden;
 }
 
 .edit-btn-wrap {
