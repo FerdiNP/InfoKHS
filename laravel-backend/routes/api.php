@@ -44,6 +44,42 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/semester/aktif', [SemesterAkademikController::class, 'aktif']);
     Route::get('/semester/{id}', [SemesterAkademikController::class, 'show']);
 
+<<<<<<< HEAD
+// KEUANGAN
+Route::prefix('keuangan')->group(function () {
+    Route::get('jenis-pembayaran', [KeuanganController::class, 'jenisPembayaran']);
+    Route::post('jenis-pembayaran', [KeuanganController::class, 'storeJenisPembayaran']);
+    Route::put('jenis-pembayaran/{id}', [KeuanganController::class, 'updateJenisPembayaran']);
+    Route::delete('jenis-pembayaran/{id}', [KeuanganController::class, 'destroyJenisPembayaran']);
+    
+    Route::get('tagihan', [KeuanganController::class, 'tagihan']);
+    Route::post('tagihan', [KeuanganController::class, 'storeTagihan']);
+    Route::put('tagihan/{id}', [KeuanganController::class, 'updateTagihan']);
+    Route::delete('tagihan/{id}', [KeuanganController::class, 'destroyTagihan']);
+    
+    Route::get('pembayaran', [KeuanganController::class, 'pembayaran']);
+    Route::post('pembayaran', [KeuanganController::class, 'storePembayaran']);
+    Route::delete('pembayaran/{id}', [KeuanganController::class, 'destroyPembayaran']); // ⬅️ TAMBAH
+});
+
+//SEMESTER AKADEMIK
+Route::get('/semester', [SemesterAkademikController::class, 'index']);
+Route::get('/semester/aktif', [SemesterAkademikController::class, 'aktif']);
+Route::get('/semester/{id}', [SemesterAkademikController::class, 'show']);
+
+// KHS
+Route::prefix('mahasiswa/{mahasiswa}')->group(function () {
+    Route::get('/khs', [KhsController::class, 'index']);
+    Route::get('/khs/semester/{semester}', [KhsController::class, 'show']);
+});
+
+// KRS
+Route::prefix('mahasiswa/{mahasiswa}')->group(function () {
+    Route::post('/krs/submit', [KrsController::class, 'submit']);
+    Route::get('/krs', [KrsController::class, 'index']);
+    Route::post('/krs', [KrsController::class, 'store']);
+    Route::delete('/krs/{detail}', [KrsController::class, 'destroy']);
+=======
     /*
      * JADWAL & PRESENSI
     */
@@ -87,4 +123,5 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('pengajuan/{id}/approve', [SuratController::class, 'approve']);
         Route::put('pengajuan/{id}/reject', [SuratController::class, 'reject']);
     });
+>>>>>>> cfb57c74928faae05a1438b78cc49af45ee18e45
 });
